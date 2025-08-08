@@ -1,0 +1,19 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 880px;
+}
+
+@media screen and (max-width: 920px) {
+  .content {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .content {
+    width: 100%;
+  }
+}

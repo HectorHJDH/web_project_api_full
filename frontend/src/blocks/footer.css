@@ -1,0 +1,20 @@
+.footer {
+  display: flex;
+  width: 880px;
+  margin: 0 0 60px 0;
+}
+
+.footer__copyright {
+  margin: 0;
+  font-family: "Inter";
+  font-size: 1.125rem;
+  color: #545454;
+}
+
+@media screen and (max-width: 920px) {
+  .footer {
+    width: 282px;
+    margin: 0 0 36px 0;
+    font-size: 0.875rem;
+  }
+}

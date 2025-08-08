@@ -1,0 +1,81 @@
+/**********************************************************************/
+.editProfile__form {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 6px 0 0 0;
+  border-radius: 10px;
+  position: relative;
+  font-family: "Inter";
+  z-index: 1;
+}
+
+.editProfile__field {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.editProfile__input {
+  width: 358px;
+  border: none;
+  border-bottom: solid 1px #c4c4c4;
+  padding: 0 0 13px 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Mientras para que contenga algo */
+.editProfile__input_type_card-name {
+  font-family: "Inter";
+}
+
+.editProfile__error {
+  color: red;
+  font-size: 12px;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  display: none;
+}
+
+.button {
+  margin: 18px 0 0 0;
+  width: 358px;
+  padding: 18px;
+  font-size: 1.125rem;
+  background-color: #ffffff;
+  border: solid 1px #c4c4c4;
+  border-radius: 2px;
+  color: #c4c4c4;
+  cursor: not-allowed;
+  pointer-events: none;
+  font-family: "Inter";
+}
+
+.button.enabled {
+  cursor: pointer;
+  pointer-events: auto;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.button.enabled:hover {
+  background-color: #313131;
+  color: #ffffff;
+}
+
+/* Mientras para que contenga algo */
+.editProfile__button {
+  font-family: "Inter";
+}
+
+@media screen and (max-width: 920px) {
+  .editProfile__input {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

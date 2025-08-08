@@ -1,0 +1,128 @@
+/* .gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 17px 20px;
+  margin: 50px 0 67px 0;
+  width: 880px;
+} */
+
+.gallery__box,
+.card__area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+  height: 361px;
+  background-color: #ffffff;
+  color: #000000;
+  gap: 0;
+}
+
+/* .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 282px;
+  height: 361px;
+  background-color: #ffffff;
+  color: #000000;
+  overflow: visible;
+  gap: 0;
+} */
+
+/* .gallery__deleteButton {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  background: url("../images/Trash.svg") no-repeat center;
+  background-size: cover;
+  height: 19px;
+  width: 21px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10;
+  border: none;
+  margin: 10;
+} */
+
+/* .gallery__image {
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  height: 282px;
+  display: block;
+  margin: 0;
+} */
+
+/* .gallery__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 79px;
+  margin: 0 18px 0 21px;
+} */
+
+/* .gallery__title {
+  font-family: "Inter-bold";
+  font-size: 1.5rem;
+  margin: 0;
+} */
+
+/* .gallery__likeButton {
+  display: flex;
+  align-items: center;
+  height: 19px;
+  width: 21px;
+  background: none;
+  border: none;
+  padding: 0;
+  background: url("../images/Like_Button.svg") no-repeat;
+  cursor: pointer;
+} */
+
+.gallery__likeButton:hover,
+.card__like:hover {
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.gallery__likeButton_active,
+.card__like_active {
+  background-image: url("../images/Like_Button_active.svg");
+  cursor: pointer;
+  z-index: 2;
+  opacity: 1;
+}
+
+.card__delete-icon:hover {
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 920px) {
+  .gallery {
+    grid-template-columns: repeat(2, 282px);
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(1, 282px);
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .gallery {
+    grid-template-columns: repeat(1, 282px);
+    justify-content: center;
+    width: 100%;
+  }
+}

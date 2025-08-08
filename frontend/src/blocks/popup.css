@@ -1,0 +1,78 @@
+.popup {
+  position: fixed;
+  top: 0;
+  /* quitamos left:0; right:0; */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup__open {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+}
+
+.popup__overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.popup__close-button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-image: url(../images/CloseIcon.svg);
+  background-repeat: no-repeat;
+  background-color: rgb(0, 0, 0, 0);
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+.popup__close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.popup__image {
+  padding: 0;
+  border-radius: 0%;
+  max-width: 800px;
+  max-height: 600px;
+}
+
+.popup__caption {
+  color: #fff;
+  margin: 0;
+  border: none;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+@media screen and (max-width: 480px) {
+  .popup {
+    /* reducimos el ancho total y centramos con margen automático */
+    width: 90%; /* 16px a cada lado */
+    max-width: 400px; /* opcional, para no quedarte muy ancho */
+    margin: 0 auto; /* centra */
+    padding: 0 16px; /* espacio interior */
+  }
+
+  .popup__button {
+    width: 100%;
+  }
+}

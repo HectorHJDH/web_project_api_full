@@ -1,0 +1,75 @@
+.image__view,
+.image__popup {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.image__popup-title {
+  color: white;
+  font-size: 0.75rem;
+  margin: 10px 0 0 0;
+  font-family: "Inter";
+}
+
+.image__popup.open {
+  display: flex;
+}
+
+.image__popup__content {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+  min-width: 430px;
+}
+
+.image__view-order {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.image__view-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.image__view-img,
+.image__popup-img {
+  max-width: 75vw;
+  max-height: 75vh;
+  position: relative;
+}
+
+.image__view-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -45px;
+  cursor: pointer;
+  background: url("../images/Close_Icon.png") no-repeat center;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  z-index: 15;
+  margin: 0 0 0 10px;
+  border: none;
+}
+
+.image__view-button:hover {
+  opacity: 0.6;
+}

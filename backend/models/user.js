@@ -1,5 +1,6 @@
+// models/user.js
 const mongoose = require("mongoose");
-
+const validator = require("validator");
 const { urlRegex } = require("../utils/utils");
 
 const userSchema = new mongoose.Schema(
@@ -8,21 +9,36 @@ const userSchema = new mongoose.Schema(
       type: String,
       minlength: 2,
       maxlength: 30,
-      required: [true, "El campo ‘name’ es obligatorio"],
+      default: "Jacques Cousteau",
     },
     about: {
       type: String,
       minlength: 2,
       maxlength: 30,
-      required: [true, "El campo ‘about’ es obligatorio"],
+      default: "Explorador",
     },
     avatar: {
       type: String,
-      required: [true, "El campo ‘avatar’ es obligatorio"],
+      default:
+        "https://practicum-content.s3.us-west-1.amazonaws.com/resources/moved_avatar_1604080799.jpg",
       validate: {
         validator: (v) => urlRegex.test(v),
         message: (props) => `${props.value} no es una URL válida`,
       },
+    },
+    email: {
+      type: String,
+      required: [true, "El campo “email” es obligatorio"],
+      unique: true,
+      validate: {
+        validator: (v) => validator.isEmail(v),
+        message: (props) => `${props.value} no es un correo válido`,
+      },
+    },
+    password: {
+      type: String,
+      required: [true, "El campo “password” es obligatorio"],
+      select: false, // ← evita devolver el hash en consultas normales
     },
   },
   {

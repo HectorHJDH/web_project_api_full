@@ -1,0 +1,117 @@
+.cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  margin: 50px auto 67px;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 280px;
+  height: 361px;
+  background-color: #ffffff;
+  color: #000000;
+  overflow: visible;
+  gap: 0;
+}
+
+.card__image {
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  height: 282px;
+  display: block;
+  margin: 0;
+}
+
+.card__delete-button {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  background: url("../images/Trash.svg") no-repeat center;
+  background-size: cover;
+  height: 19px;
+  width: 21px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 1;
+  border: none;
+  margin: 10;
+}
+
+.card__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 79px;
+  margin: 0 18px 0 21px;
+}
+
+.card__title {
+  font-family: "Inter-bold";
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.card__like-button {
+  display: flex;
+  align-items: center;
+  height: 19px;
+  width: 21px;
+  background: none;
+  border: none;
+  padding: 0;
+  background: url("../images/Like_Button.svg") no-repeat;
+  cursor: pointer;
+}
+
+.card__like-button:hover {
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.card__like-button_is-active {
+  background-image: url("../images/Like_Button_active.svg");
+  cursor: pointer;
+  z-index: 2;
+  opacity: 1;
+}
+
+.card__delete-button:hover {
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 920px) {
+  .cards__list {
+    grid-template-columns: repeat(2, 282px);
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cards__list {
+    grid-template-columns: repeat(1, 282px);
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .cards__list {
+    grid-template-columns: repeat(1, 282px);
+    justify-content: center;
+    width: 100%;
+  }
+}

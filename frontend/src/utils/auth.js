@@ -50,5 +50,5 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: "https://se-register-api.en.tripleten-services.com/v1",
+  baseUrl: "http://api.hectorvmbootcamp.chickenkiller.com",
 });

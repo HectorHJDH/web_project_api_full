@@ -50,5 +50,5 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: "http://api.hectorvmbootcamp.chickenkiller.com",
+  baseUrl: "https://api.hectorvmbootcamp.chickenkiller.com",
 });

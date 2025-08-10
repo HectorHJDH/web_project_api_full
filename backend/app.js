@@ -4,6 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const { errors: celebrateErrors } = require("celebrate");
+const cors  = require("cors");
 
 const { login, createUser } = require("./controllers/users");
 const auth = require("./middlewares/auth");
@@ -15,6 +16,11 @@ const errorLogger = require("./middlewares/errorLogger");
 const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
+
+app.use(cors({
+  origin:[ "http://localhost:3000", "https://hectorvmbootcamp.chickenkiller.com", "https://www.hectorvmbootcamp.chickenkiller.com"],
+}));
+
 const { PORT = 3001, MONGO_URL = "mongodb://localhost:27017/aroundb" } =
   process.env;
 

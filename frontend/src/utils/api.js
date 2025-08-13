@@ -6,7 +6,10 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -18,7 +21,10 @@ class Api {
 
   getInitialUser() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -34,7 +40,10 @@ class Api {
     }
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -47,7 +56,10 @@ class Api {
   createCard(card) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
       body: JSON.stringify(card),
     }).then((res) => {
       if (res.ok) {
@@ -61,7 +73,10 @@ class Api {
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -74,7 +89,10 @@ class Api {
   removeLikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -87,7 +105,10 @@ class Api {
   editProfileImage({ avatar }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
       body: JSON.stringify({ avatar }),
     }).then((res) => {
       if (res.ok) {
@@ -101,7 +122,10 @@ class Api {
   editProfileCredentials({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
       body: JSON.stringify({ name, about }),
     }).then((res) => {
       if (res.ok) {
@@ -114,7 +138,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://around-api.es.tripleten-services.com/v1",
+  baseUrl: "https://api.hectorvmbootcamp.chickenkiller.com",
   headers: {
     authorization: "f1b02352-6399-4c87-80fa-4dabfd185e85",
     "Content-Type": "application/json",

@@ -57,7 +57,7 @@ function App() {
       setCards(fetchedCards);
     } catch (err) {
       console.error("Error durante initializeApp:", err);
-      localStorage.removeItem("jwt");
+      // localStorage.removeItem("jwt");
       setLoggedin(false);
       setCurrentUser(null);
     } finally {

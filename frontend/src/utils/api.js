@@ -140,7 +140,8 @@ class Api {
 export const api = new Api({
   baseUrl: "https://api.hectorvmbootcamp.chickenkiller.com",
   headers: {
-    authorization: "f1b02352-6399-4c87-80fa-4dabfd185e85",
+    authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    // "f1b02352-6399-4c87-80fa-4dabfd185e85",
     "Content-Type": "application/json",
   },
 });

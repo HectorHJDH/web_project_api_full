@@ -14,8 +14,11 @@ module.exports = (req, res, next) => {
 
   let payload;
   try {
+    console.log("Payload: ", payload);
+
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
+    console.log("error: ", err);
     return res.status(403).json({ message: "Token inválido o expirado" });
   }
 

@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
-      bootstrapApp(token);
+      initializeApp(token);
     } else {
       setIsCheckingToken(false);
     }
@@ -43,10 +43,10 @@ function App() {
     return <div>Cargando...</div>;
   }
 
-  async function bootstrapApp(token) {
+  async function initializeApp(token) {
     try {
-      const { data: user } = await auth.checkToken(token); 
-      const fullUser = await api.getInitialUser(); 
+      const { data: user } = await auth.checkToken(token);
+      const fullUser = await api.getInitialUser();
 
       const mergedUser = { ...fullUser, email: user.email };
 
@@ -56,7 +56,7 @@ function App() {
       const fetchedCards = await api.getInitialCards();
       setCards(fetchedCards);
     } catch (err) {
-      console.error("Error durante bootstrapApp:", err);
+      console.error("Error durante initializeApp:", err);
       localStorage.removeItem("jwt");
       setLoggedin(false);
       setCurrentUser(null);
@@ -166,7 +166,7 @@ function App() {
       const { token } = await auth.signIn(credentials);
       localStorage.setItem("jwt", token);
 
-      await bootstrapApp(token);
+      await initializeApp(token);
 
       setTimeout(() => {
         navigate("/", { replace: true });

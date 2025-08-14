@@ -43,23 +43,76 @@ function App() {
     return <div>Cargando...</div>;
   }
 
-  async function initializeApp(token) {
-    try {
-      const { data: user } = await auth.checkToken(token);
-      const fullUser = await api.getInitialUser();
+  // async function initializeApp(token) {
+  //   try {
+  //     const { data: user } = await auth.checkToken(token);
+  //     const fullUser = await api.getInitialUser();
 
-      const mergedUser = { ...fullUser, email: user.email };
+  //     const mergedUser = { ...fullUser, email: user.email };
+
+  //     setLoggedin(true);
+  //     setCurrentUser(mergedUser);
+
+  //     const fetchedCards = await api.getInitialCards();
+  //     setCards(fetchedCards);
+  //   } catch (err) {
+  //     console.error("Error durante initializeApp:", err);
+  //     localStorage.removeItem("jwt");
+  //     setLoggedin(false);
+  //     setCurrentUser(null);
+  //   } finally {
+  //     setIsCheckingToken(false);
+  //   }
+  // }
+
+  function extractEmailFromAuthResponse(resp) {
+    if (!resp) return null;
+
+    const maybeData = resp.data ?? resp;
+
+    if (maybeData.email) return maybeData.email;
+    if (maybeData.user && maybeData.user.email) return maybeData.user.email;
+    if (maybeData.payload && maybeData.payload.email)
+      return maybeData.payload.email;
+
+    return null;
+  }
+
+  async function initializeApp(token) {
+    if (!token) {
+      localStorage.removeItem("jwt");
+      setLoggedin(false);
+      setCurrentUser(null);
+      setCards([]);
+      setIsCheckingToken(false);
+      return;
+    }
+
+    try {
+      const authResp = await auth.checkToken(token);
+
+      const emailFromAuth = extractEmailFromAuthResponse(authResp);
+
+      const [fullUser, fetchedCards] = await Promise.all([
+        api.getInitialUser(),
+        api.getInitialCards(),
+      ]);
+
+      const finalEmail = emailFromAuth ?? (fullUser && fullUser.email) ?? null;
+      const mergedUser = {
+        ...(fullUser || {}),
+        ...(finalEmail ? { email: finalEmail } : {}),
+      };
 
       setLoggedin(true);
       setCurrentUser(mergedUser);
-
-      const fetchedCards = await api.getInitialCards();
-      setCards(fetchedCards);
+      setCards(Array.isArray(fetchedCards) ? fetchedCards : []);
     } catch (err) {
       console.error("Error durante initializeApp:", err);
-      // localStorage.removeItem("jwt");
+      localStorage.removeItem("jwt");
       setLoggedin(false);
       setCurrentUser(null);
+      setCards([]);
     } finally {
       setIsCheckingToken(false);
     }
@@ -88,17 +141,19 @@ function App() {
       .catch((err) => console.error("Error al cambiar like:", err));
   };
 
-  // Delete
   const handleCardDelete = (cardId) => {
-    api
+    return api
       .deleteCard(cardId)
-      .then(() => {
+      .then((res) => {
         setCards((cards) => cards.filter((c) => c._id !== cardId));
+        return res; 
       })
-      .catch((err) => console.error("Error al borrar card:", err));
+      .catch((err) => {
+        console.error("App: api.deleteCard error", err);
+        throw err; 
+      });
   };
 
-  // Actualizar nombre/descripción
   const handleUpdateUser = ({ name, about }) => {
     api
       .editProfileCredentials({ name, about })

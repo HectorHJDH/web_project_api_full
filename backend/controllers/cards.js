@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Card = require("../models/cards");
 
 // GET /cards — devuelve todas las tarjetas
@@ -26,23 +27,57 @@ module.exports.createCard = (req, res, next) => {
 };
 
 // DELETE /cards/:cardId — elimina una tarjeta por _id
-module.exports.deleteCard = (req, res, next) => {
+// module.exports.deleteCard = (req, res, next) => {
+//   const { cardId } = req.params;
+//   Card.findById(cardId)
+//     .then((card) => {
+//       if (!card) {
+//         return res.status(404).json({ message: "Tarjeta no encontrada" });
+//       }
+//       return Card.findByIdAndRemove(cardId).then(() =>
+//         res.json({ message: "Tarjeta eliminada correctamente" })
+//       );
+//     })
+//     .catch((err) => {
+//       if (err.name === "CastError") {
+//         return res.status(400).json({ message: "ID de tarjeta inválido" });
+//       }
+//       next(err);
+//     });
+// };
+
+// controllers/cards.js
+
+module.exports.deleteCard = async (req, res, next) => {
   const { cardId } = req.params;
-  Card.findById(cardId)
-    .then((card) => {
-      if (!card) {
-        return res.status(404).json({ message: "Tarjeta no encontrada" });
-      }
-      return Card.findByIdAndRemove(cardId).then(() =>
-        res.json({ message: "Tarjeta eliminada correctamente" })
-      );
-    })
-    .catch((err) => {
-      if (err.name === "CastError") {
-        return res.status(400).json({ message: "ID de tarjeta inválido" });
-      }
-      next(err);
-    });
+
+  if (!mongoose.Types.ObjectId.isValid(cardId)) {
+    const err = new Error("ID de tarjeta inválido");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  try {
+    const card = await Card.findById(cardId);
+    if (!card) {
+      const err = new Error("Tarjeta no encontrada");
+      err.statusCode = 404;
+      return next(err);
+    }
+
+    if (String(card.owner) !== String(req.user._id)) {
+      const err = new Error("No tienes permisos para eliminar esta tarjeta");
+      err.statusCode = 403;
+      return next(err);
+    }
+
+    const deleted = await Card.findByIdAndDelete(cardId);
+
+    return res.json({ data: deleted });
+  } catch (error) {
+    console.error("deleteCard: unexpected error", error);
+    return next(error);
+  }
 };
 
 // PUT /cards/:cardId/likes — dar like

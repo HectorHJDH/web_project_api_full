@@ -34,23 +34,45 @@ class Api {
     });
   }
 
-  deleteCard(cardId) {
+  async deleteCard(cardId) {
     if (!cardId) {
-      return;
+      return Promise.reject(new Error("cardId inválido"));
     }
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+
+    const token = localStorage.getItem("jwt");
+    const url = `${this._baseUrl}/cards/${cardId}`;
+    const options = {
       method: "DELETE",
       headers: {
         ...this._headers,
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        Authorization: `Bearer ${token}`,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
+    };
+
+    try {
+      const res = await fetch(url, options);
+      let data;
+
+      if (res.status !== 204) {
+        const contentType = res.headers.get("content-type") || "";
+        if (contentType.includes("application/json")) {
+          data = await res.json();
+        } else {
+          data = await res.text();
+        }
       }
 
-      return Promise.reject(`Error: ${res.status}`);
-    });
+      if (res.ok) {
+        return data ?? { success: true }; // 👈 devolvemos algo incluso si no hay body
+      }
+
+      const error = new Error(`HTTP ${res.status}`);
+      error.status = res.status;
+      error.body = data;
+      return Promise.reject(error);
+    } catch (err) {
+      return Promise.reject(err);
+    }
   }
 
   createCard(card) {
@@ -138,8 +160,8 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://api.hectorvmbootcamp.chickenkiller.com",
-  // baseUrl: "http://localhost:3001",
+  // baseUrl: "https://api.hectorvmbootcamp.chickenkiller.com",
+  baseUrl: "http://localhost:3001",
   headers: {
     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     // "f1b02352-6399-4c87-80fa-4dabfd185e85",

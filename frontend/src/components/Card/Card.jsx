@@ -20,9 +20,14 @@ export default function Card(props) {
     title: "¿Estás seguro/a?",
     children: (
       <RemoveCard
-        onConfirm={() => {
-          onCardDelete(_id);
-          closePopup();
+        onConfirm={async () => {
+          if (typeof onCardDelete !== "function") {
+            return;
+          }
+          try {
+            const result = await onCardDelete(_id);
+            closePopup();
+          } catch (err) {}
         }}
       />
     ),

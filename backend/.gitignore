@@ -17,3 +17,5 @@ node_modules
 # .gitignore
 /logs
 logs/
+
+.env

@@ -2,7 +2,6 @@ import checkIcon from "../../images/Check_Icon.svg";
 import errorIcon from "../../images/Error_Icon.svg";
 
 export default function InfoTooltip({ registerStatus }) {
-  console.log("registerStatus:", registerStatus);
 
   let textMessage = registerStatus
     ? "¡Correcto! Ya estás registrado."

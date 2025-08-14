@@ -42,7 +42,7 @@
   position: absolute;
   top: -40px;
   right: -40px;
-  border: 2px solid red !important;
+  /* border: 2px solid red !important; */
 }
 
 .popup__title {

@@ -1,15 +1,24 @@
-export default function RemoveCard({ isOpen, title }) {
+export default function RemoveCard({ onConfirm, onCancel, title }) {
   return (
-    <form
-      className="removeCard__form"
-      name="removeCard-form"
-      id="removeCard-form"
-      noValidate
-    >
-      {title && <h3 className="removeCard__title">Estas seguro/a?</h3>}
-      <button className="removeCard__button popup__button" type="submit">
-        Si
-      </button>
-    </form>
+    <div className="removeCard">
+      <h3 className="removeCard__title">{title}</h3>
+
+      <div className="removeCard__actions">
+        <button
+          type="button"
+          className="removeCard__button removeCard__button--confirm"
+          onClick={() => {
+            if (typeof onConfirm === "function") {
+              const result = onConfirm();
+              if (result && typeof result.then === "function") {
+                result.catch(() => {});
+              }
+            }
+          }}
+        >
+          Si
+        </button>
+      </div>
+    </div>
   );
 }

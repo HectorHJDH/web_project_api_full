@@ -4,7 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const { errors: celebrateErrors } = require("celebrate");
-const cors  = require("cors");
+const cors = require("cors");
 
 const { login, createUser } = require("./controllers/users");
 const auth = require("./middlewares/auth");
@@ -17,12 +17,17 @@ const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
 
-app.use(cors({
-  origin:[ "http://localhost:3000", "https://hectorvmbootcamp.chickenkiller.com", "https://www.hectorvmbootcamp.chickenkiller.com"],
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://hectorvmbootcamp.chickenkiller.com",
+      "https://www.hectorvmbootcamp.chickenkiller.com",
+    ],
+  })
+);
 
-const { PORT = 3001, MONGO_URL = "mongodb://localhost:27017/aroundb" } =
-  process.env;
+const { PORT, MONGO_URL } = process.env;
 
 // Middleware para parsear JSON
 app.use(express.json());
@@ -30,6 +35,11 @@ app.use(express.json());
 // Logger de peticiones
 app.use(requestLogger);
 
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("El servidor va a caer");
+  }, 0);
+});
 // ─── Rutas públicas ────────────────────────────────────────────────────
 app.post("/signup", createUser);
 app.post("/signin", login);

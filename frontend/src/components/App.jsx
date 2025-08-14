@@ -43,28 +43,6 @@ function App() {
     return <div>Cargando...</div>;
   }
 
-  // async function initializeApp(token) {
-  //   try {
-  //     const { data: user } = await auth.checkToken(token);
-  //     const fullUser = await api.getInitialUser();
-
-  //     const mergedUser = { ...fullUser, email: user.email };
-
-  //     setLoggedin(true);
-  //     setCurrentUser(mergedUser);
-
-  //     const fetchedCards = await api.getInitialCards();
-  //     setCards(fetchedCards);
-  //   } catch (err) {
-  //     console.error("Error durante initializeApp:", err);
-  //     localStorage.removeItem("jwt");
-  //     setLoggedin(false);
-  //     setCurrentUser(null);
-  //   } finally {
-  //     setIsCheckingToken(false);
-  //   }
-  // }
-
   function extractEmailFromAuthResponse(resp) {
     if (!resp) return null;
 
@@ -146,11 +124,11 @@ function App() {
       .deleteCard(cardId)
       .then((res) => {
         setCards((cards) => cards.filter((c) => c._id !== cardId));
-        return res; 
+        return res;
       })
       .catch((err) => {
         console.error("App: api.deleteCard error", err);
-        throw err; 
+        throw err;
       });
   };
 

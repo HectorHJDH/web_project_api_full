@@ -1,4 +1,3 @@
-// middlewares/requestLogger.js
 const { logRequest } = require("../utils/logger");
 
 const maskSensitive = (obj) => {
@@ -26,7 +25,6 @@ module.exports = (req, res, next) => {
     body: maskSensitive(body),
   };
 
-  // No await: no bloquear la petición si el disco va lento
   logRequest(entry).catch(() => {});
   next();
 };

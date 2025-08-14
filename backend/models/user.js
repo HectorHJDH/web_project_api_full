@@ -1,4 +1,3 @@
-// models/user.js
 const mongoose = require("mongoose");
 const validator = require("validator");
 const { urlRegex } = require("../utils/utils");
@@ -38,7 +37,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "El campo “password” es obligatorio"],
-      select: false, // ← evita devolver el hash en consultas normales
+      select: false,
     },
   },
   {

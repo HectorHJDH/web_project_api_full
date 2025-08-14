@@ -1,4 +1,3 @@
-// routes/users.js
 const express = require("express");
 const { celebrate, Joi, Segments } = require("celebrate");
 const { validateURL } = require("../utils/validate");

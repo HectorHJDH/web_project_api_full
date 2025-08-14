@@ -1,4 +1,3 @@
-// utils/logger.js
 const fs = require("fs");
 const path = require("path");
 
@@ -15,11 +14,7 @@ const appendJsonLine = async (filePath, obj) => {
   try {
     await fs.promises.appendFile(filePath, line, "utf8");
   } catch (e) {
-    // Si el logging falla, no queremos romper la app; lo imprimimos por consola
-    // pero NO lanzamos error.
-    /* eslint-disable no-console */
     console.error("Logger append error:", e);
-    /* eslint-enable no-console */
   }
 };
 

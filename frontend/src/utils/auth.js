@@ -51,5 +51,4 @@ class Auth {
 
 export const auth = new Auth({
   baseUrl: "https://api.hectorvmbootcamp.chickenkiller.com",
-  // baseUrl: "http://localhost:3001",
 });

@@ -63,7 +63,7 @@ class Api {
       }
 
       if (res.ok) {
-        return data ?? { success: true }; // 👈 devolvemos algo incluso si no hay body
+        return data ?? { success: true };
       }
 
       const error = new Error(`HTTP ${res.status}`);
@@ -161,10 +161,8 @@ class Api {
 
 export const api = new Api({
   baseUrl: "https://api.hectorvmbootcamp.chickenkiller.com",
-  // baseUrl: "http://localhost:3001",
   headers: {
     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    // "f1b02352-6399-4c87-80fa-4dabfd185e85",
     "Content-Type": "application/json",
   },
 });

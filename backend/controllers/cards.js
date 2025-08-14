@@ -27,27 +27,6 @@ module.exports.createCard = (req, res, next) => {
 };
 
 // DELETE /cards/:cardId — elimina una tarjeta por _id
-// module.exports.deleteCard = (req, res, next) => {
-//   const { cardId } = req.params;
-//   Card.findById(cardId)
-//     .then((card) => {
-//       if (!card) {
-//         return res.status(404).json({ message: "Tarjeta no encontrada" });
-//       }
-//       return Card.findByIdAndRemove(cardId).then(() =>
-//         res.json({ message: "Tarjeta eliminada correctamente" })
-//       );
-//     })
-//     .catch((err) => {
-//       if (err.name === "CastError") {
-//         return res.status(400).json({ message: "ID de tarjeta inválido" });
-//       }
-//       next(err);
-//     });
-// };
-
-// controllers/cards.js
-
 module.exports.deleteCard = async (req, res, next) => {
   const { cardId } = req.params;
 

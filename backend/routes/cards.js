@@ -1,4 +1,3 @@
-// routes/cards.js
 const express = require("express");
 const { celebrate, Joi, Segments } = require("celebrate");
 const {

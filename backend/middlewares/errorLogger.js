@@ -1,4 +1,3 @@
-// middlewares/errorLogger.js
 const { logError } = require("../utils/logger");
 
 const maskSensitive = (obj) => {
@@ -8,10 +7,6 @@ const maskSensitive = (obj) => {
   return copy;
 };
 
-/*
-  Error middleware debe tener 4 parámetros (err, req, res, next) para que Express
-  lo identifique como middleware de error.
-*/
 module.exports = (err, req, res, next) => {
   const { method, originalUrl: url } = req;
   const statusCode = err.statusCode || 500;
@@ -30,9 +25,7 @@ module.exports = (err, req, res, next) => {
     stack: err.stack,
   };
 
-  // No await para no bloquear; en caso de fallo, no queremos romper la respuesta final
   logError(entry).catch(() => {});
 
-  // Pasamos el error al siguiente middleware (errorHandler) para que responda
   next(err);
 };

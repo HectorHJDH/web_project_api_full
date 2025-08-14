@@ -1,4 +1,3 @@
-// controllers/users.js
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -64,11 +63,9 @@ module.exports.createUser = async (req, res, next) => {
 };
 
 // Controlador de login
-// controllers/users.js
 module.exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    // Trae el hash de password a propósito con .select('+password')
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return res
@@ -141,7 +138,7 @@ module.exports.updateAvatar = (req, res, next) => {
 };
 
 module.exports.getCurrentUser = (req, res, next) => {
-  const userId = req.user._id; // viene del middleware auth
+  const userId = req.user._id;
   User.findById(userId)
     .then((user) => {
       if (!user) {
